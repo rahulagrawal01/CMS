@@ -1,0 +1,39 @@
+{% extends 'basic.html' %}
+{% block title %}My Articles{% endblock %}
+{% block body %}
+{% load static %}
+    {% if messages %}
+        {% for x in messages %}
+            <script>
+                Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title:'{{ x }}',
+            showConfirmButton: false,
+            timer: 1500
+            })
+            </script>
+    `       {% endfor %}
+    {% endif %}
+    {% if data %}
+        <h2 style="margin-left: 13%;padding-top: 2%;font-family: 'Lemonada', cursive;color: #0d0f91">My articles</h2>
+
+       {% for x in data %}
+        <div class="row" style="padding-top: 2%">
+            <div class="col-md-2"></div>
+                <div class="col-sm-4">
+                    <img src="{{ x.img.url }}" class="card-img-top" alt="..." width="800" height="200">
+                </div>
+           <div class="col-sm-4">
+                <h3 class="card-title" style="font-weight: bold;color: red">{{x.title }}</h3>
+                <h6>submitted by <span style="color: darkblue">{{ user_name }}</span> at {{ x.datetime }}</h6>
+                <h5 style="font-weight: bold">Description  :
+                    <h6>{{ x.desc }}</h6>
+                </h5>
+                <a href="/update_article/{{ x.id }}/" class="btn btn-outline-danger">Update</a>
+                <a href="/delete_article/{{ x.id }}/" class="btn btn-outline-danger" style="margin-left: 2%">Remove</a>
+            </div>
+        </div>
+       {% endfor %}
+    {% endif %}
+{% endblock %}

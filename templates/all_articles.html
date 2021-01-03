@@ -1,0 +1,25 @@
+{% extends 'basic.html' %}
+{% block title %}All Articles{% endblock %}
+{% block body %}
+{% load static %}
+
+    {% if data %}
+        <h2 style="margin-left: 13%;padding-top: 2%;font-family: 'Lemonada', cursive;color: #0d0f91">All articles</h2>
+
+       {% for x in data.values %}
+       <div class="row" style="padding-top: 2%">
+        <div class="col-md-2"></div>
+        <div class="col-sm-4">
+            <img src="{{ x.data.img.url }}" class="card-img-top" alt="..." width="800" height="200">
+        </div>
+            <div class="col-sm-4">
+                <h3 class="card-title" style="font-weight: bold;color: red">{{x.data.title }}</h3>
+                <h6>submitted by <span style="color: darkblue">{{ x.name }}</span> at {{ x.data.datetime }}</h6>
+                <h5 style="font-weight: bold">Description  :
+                    <h6>{{ x.data.desc }}</h6>
+                </h5>
+            </div>
+        {% endfor %}
+     </div>
+    {% endif %}
+{% endblock %}
